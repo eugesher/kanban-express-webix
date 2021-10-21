@@ -9,22 +9,29 @@
     "start": "node dist/app.js",
     "dev:build": "tsc -w --preserveWatchOutput",
     "dev:start": "nodemon dist/app.js",
-    "dev": "concurrently npm:dev:*"
+    "dev": "concurrently npm:dev:*",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config=src/config/ormconfig.ts",
+    "db:drop": "npm run typeorm schema:drop",
+    "db:create": "npm run typeorm migration:generate -- -n",
+    "db:migrate": "npm run typeorm migration:run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/dotenv": "^8.2.0",
-    "@types/node": "^16.11.1",
     "body-parser": "^1.19.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "rimraf": "^3.0.2"
+    "pg": "^8.7.1",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "typeorm": "^0.2.38"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.1",
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
+    "@types/node": "^16.11.1",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
     "concurrently": "^6.3.0",
@@ -33,6 +40,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "nodemon": "^2.0.14",
     "prettier": "^2.4.1",
+    "tsconfig-paths": "^3.10.1",
     "typescript": "^4.4.4"
   }
 }

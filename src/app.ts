@@ -1,9 +1,13 @@
-import { join } from 'path';
+import 'reflect-metadata';
 import dotenv from 'dotenv';
 import express from 'express';
+import { createConnection } from 'typeorm';
+import ormconfig from './config/ormconfig';
 
-dotenv.config({ path: join(__dirname, '..', 'dev.env') });
+dotenv.config();
 
-const app = express();
+createConnection(ormconfig).then((connection) => {
+  const app = express();
 
-app.listen(parseInt(process.env.APP_PORT));
+  app.listen(parseInt(process.env.APP_PORT));
+});
