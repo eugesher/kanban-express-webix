@@ -15,7 +15,7 @@ export async function signup(
     });
 
     if (user) {
-      next(new UnprocessableEntityError('email is already taken'));
+      return next(new UnprocessableEntityError('email is already taken'));
     }
 
     user = new User();
@@ -24,6 +24,6 @@ export async function signup(
     delete user.password;
     res.send(user);
   } catch (e) {
-    next(e);
+    return next(e);
   }
 }
