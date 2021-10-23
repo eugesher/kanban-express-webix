@@ -29,8 +29,10 @@ createConnection(ormconfig)
     app.post('/register', AppController.register);
     app.post(
       '/login',
-      passport.authenticate('local', { failureRedirect: '/' }),
-      AppController.onLogin,
+      passport.authenticate('local', {
+        failureRedirect: '/',
+        successRedirect: '/dashboard',
+      }),
     );
 
     app.get('/', AppController.getHomePage);

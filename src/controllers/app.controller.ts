@@ -34,10 +34,6 @@ export default class AppController {
     }
   }
 
-  public static onLogin(req: Request, res: Response): void {
-    res.redirect('/dashboard');
-  }
-
   public static onLogout(req: Request, res: Response): void {
     req.logout();
     res.redirect('/login');
