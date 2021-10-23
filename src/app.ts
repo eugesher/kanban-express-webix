@@ -6,7 +6,7 @@ import session from 'express-session';
 import { createConnection } from 'typeorm';
 import { ensureLoggedIn } from 'connect-ensure-login';
 import { errorHandler } from './exceptions/error-handler';
-import { register } from './controllers/users.controller';
+import { register } from './controllers/app.controller';
 import ormconfig from './config/ormconfig';
 import sessionOptions from './config/session-options';
 import passport from './middlewares/passport';
