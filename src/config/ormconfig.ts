@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
-import { join } from 'path';
 import { ConnectionOptions } from 'typeorm';
+import { join } from 'path';
 
 dotenv.config();
 

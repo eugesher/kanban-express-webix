@@ -1,7 +1,8 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
-import { IError } from '../interfaces/error.interface';
 
-export const errorHandler: ErrorRequestHandler = (
+import IError from '../interfaces/error.interface';
+
+const errorHandler: ErrorRequestHandler = (
   err: IError,
   req: Request,
   res: Response,
@@ -15,3 +16,5 @@ export const errorHandler: ErrorRequestHandler = (
 
   next();
 };
+
+export default errorHandler;

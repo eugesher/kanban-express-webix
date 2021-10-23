@@ -5,26 +5,20 @@ import bodyParser from 'body-parser';
 import session from 'express-session';
 import { createConnection } from 'typeorm';
 import { ensureLoggedIn } from 'connect-ensure-login';
-import { errorHandler } from './exceptions/error-handler';
-import { register } from './controllers/app.controller';
+import passport from './middlewares/passport';
 import ormconfig from './config/ormconfig';
 import sessionOptions from './config/session-options';
-import passport from './middlewares/passport';
-import {
-  getDashboardPage,
-  getHomePage,
-  getLoginPage,
-  getSecretPage,
-  onLogin,
-  onLogout,
-} from './controllers/app.controller';
+import AppController from './controllers/app.controller';
+import errorHandler from './exceptions/error-handler';
 
 dotenv.config();
+
+const PORT = parseInt(process.env.APP_PORT);
+const LISTEN_MESSAGE = `magic happens on port ${PORT}`;
 
 createConnection(ormconfig)
   .then(() => {
     const app = express();
-    const port = parseInt(process.env.APP_PORT);
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,23 +26,23 @@ createConnection(ormconfig)
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.post('/register', register);
+    app.post('/register', AppController.register);
     app.post(
       '/login',
       passport.authenticate('local', { failureRedirect: '/' }),
-      onLogin,
+      AppController.onLogin,
     );
 
-    app.get('/', getHomePage);
-    app.get('/login', getLoginPage);
-    app.get('/dashboard', ensureLoggedIn(), getDashboardPage);
-    app.get('/secret', ensureLoggedIn(), getSecretPage);
-    app.get('/logout', onLogout);
+    app.get('/', AppController.getHomePage);
+    app.get('/login', AppController.getLoginPage);
+    app.get('/dashboard', ensureLoggedIn(), AppController.getDashboardPage);
+    app.get('/secret', ensureLoggedIn(), AppController.getSecretPage);
+    app.get('/logout', AppController.onLogout);
 
     app.use(errorHandler);
 
-    app.listen(port, () => {
-      console.log(`magic happens on port ${port}`);
+    app.listen(PORT, () => {
+      console.log(LISTEN_MESSAGE);
     });
   })
   .catch((error) => {

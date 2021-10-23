@@ -1,4 +1,4 @@
-export interface IRegisterDto {
+export default interface IRegisterDto {
   username: string;
   password: string;
 }

@@ -1,4 +1,4 @@
-export class UnprocessableEntityException extends Error {
+export default class UnprocessableEntityException extends Error {
   private readonly statusCode: number;
 
   constructor(message) {
