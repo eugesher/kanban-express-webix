@@ -14,7 +14,7 @@ const ormconfig: ConnectionOptions = {
   entities: [join(__dirname, '..', 'entities/*{.ts,.js}')],
   migrations: [join(__dirname, '..', 'migrations/*{.ts,.js}')],
   cli: {
-    migrationsDir: 'src/migrations',
+    migrationsDir: 'server/migrations',
   },
 };
 

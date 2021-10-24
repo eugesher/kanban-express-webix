@@ -8,6 +8,7 @@ import { ensureLoggedIn } from 'connect-ensure-login';
 import passport from './middlewares/passport';
 import ormconfig from './config/ormconfig';
 import sessionOptions from './config/session-options';
+import api from './routes';
 import AppController from './controllers/app.controller';
 import errorHandler from './exceptions/error-handler';
 
@@ -26,20 +27,9 @@ createConnection(ormconfig)
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.post('/register', AppController.register);
-    app.post(
-      '/login',
-      passport.authenticate('local', {
-        failureRedirect: '/',
-        successRedirect: '/dashboard',
-      }),
-    );
+    app.use('/api', api);
 
-    app.get('/', AppController.getHomePage);
-    app.get('/login', AppController.getLoginPage);
     app.get('/dashboard', ensureLoggedIn(), AppController.getDashboardPage);
-    app.get('/secret', ensureLoggedIn(), AppController.getSecretPage);
-    app.get('/logout', AppController.onLogout);
 
     app.use(errorHandler);
 

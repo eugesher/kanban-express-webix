@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import { join } from 'path';
 import User from '../entities/user.entity';
 import IRegisterDto from '../interfaces/register-dto.interface';
 import UnprocessableEntityException from '../exceptions/unprocessable-entity.exception';
@@ -34,27 +33,10 @@ export default class AppController {
     }
   }
 
-  public static onLogout(req: Request, res: Response): void {
-    req.logout();
-    res.redirect('/login');
-  }
-
-  public static getHomePage(req: Request, res: Response): void {
-    res.sendFile(join(__dirname, '../static/index.html'));
-  }
-
-  public static getLoginPage(req: Request, res: Response): void {
-    res.sendFile(join(__dirname, '../static/login.html'));
-  }
-
   public static getDashboardPage(req: Request, res: Response): void {
     const user = req.user as User;
     res.send(
-      `Hello ${user.username}. Your session ID is ${req.sessionID} and your session expires in ${req.session.cookie.maxAge} milliseconds.<br><br><a href="/logout">Log Out</a><br><br><a href="/secret">Members Only</a>`,
+      `Hello ${user.username}. Your session ID is ${req.sessionID} and your session expires in ${req.session.cookie.maxAge} milliseconds.`,
     );
-  }
-
-  public static getSecretPage(req: Request, res: Response): void {
-    res.sendFile(join(__dirname, '../static/secret-page.html'));
   }
 }
