@@ -1,17 +1,9 @@
 import { Router } from 'express';
 import AppController from '../controllers/app.controller';
 import passport from '../middlewares/passport';
-import { Session, SessionData } from 'express-session';
-
-// todo: refactor
+import ISession from '../interfaces/session.interface';
 
 const api = Router();
-
-type TSession = Session & Partial<SessionData>;
-
-interface ISession extends TSession {
-  user?: any;
-}
 
 api.post('/register', AppController.register);
 api.post(
