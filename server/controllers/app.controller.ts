@@ -26,7 +26,6 @@ export default class AppController {
 
       user = await getRepository(User).save(user);
       delete user.password;
-
       res.send(user);
     } catch (e) {
       return next(e);

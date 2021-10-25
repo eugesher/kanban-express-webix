@@ -8,7 +8,6 @@
     "build:server": "tsc && cp -r ./public ./dist",
     "build:app": "webpack",
     "build": "concurrently npm:build:*",
-    "start": "node dist/server/app.js",
     "dev:build": "tsc -w --preserveWatchOutput",
     "dev:start": "nodemon dist/server/app.js",
     "dev:app": "webpack-dev-server --open",
