@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import User from '../entities/user.entity';
-import IRegisterDto from '../dto/register.dto';
+import IRegisterDto from '../types/dto/register.dto';
 import UnprocessableEntityException from '../exceptions/unprocessable-entity.exception';
 
 const EMAIL_TAKEN_MESSAGE = 'email is already taken';

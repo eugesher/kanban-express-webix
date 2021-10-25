@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import ICreateTaskDto from '../dto/create-task.dto';
+import ICreateTaskDto from '../types/dto/create-task.dto';
 import Task from '../entities/task.entity';
 
 export default class TasksController {

@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import AppController from '../controllers/app.controller';
 import passport from '../middlewares/passport.middleware';
-import ISession from '../interfaces/session.interface';
+import ISession from '../types/interfaces/session.interface';
 import tasksRoute from './tasks.route';
 import User from '../entities/user.entity';
 
