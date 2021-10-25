@@ -8,6 +8,9 @@ import {
 } from 'typeorm-fixtures-cli/dist';
 import { createConnection, getRepository } from 'typeorm';
 import ormconfig from '../config/ormconfig';
+import User from '../entities/user.entity';
+
+const users: Pick<User, 'username' | 'password'>[] = [];
 
 async function loadFixtures(fixturesPath: string): Promise<void> {
   let connection;
@@ -27,12 +30,16 @@ async function loadFixtures(fixturesPath: string): Promise<void> {
       fixture.locale = 'en_US';
       const entity = await builder.build(fixture);
 
-      await getRepository(entity.constructor.name).save(entity);
+      if (entity.constructor.name === 'User') {
+        const { username, password } = entity as User;
+        users.push({ username, password });
+      }
+
       counter++;
       console.clear();
-      console.log(
-        `${entity.constructor.name} loaded (${counter}/${fixtures.length})`,
-      );
+      console.log(`Fixtures loaded (${counter}/${fixtures.length})`);
+
+      await getRepository(entity.constructor.name).save(entity);
     }
   } catch (err) {
     throw err;
@@ -45,7 +52,8 @@ async function loadFixtures(fixturesPath: string): Promise<void> {
 
 loadFixtures(join(__dirname, 'config'))
   .then(() => {
-    console.clear();
-    console.log('Fixtures are successfully loaded.');
+    console.log('\nUsers');
+    console.table(users);
+    console.log('\nFixtures are successfully loaded.');
   })
   .catch((err) => console.log(err));

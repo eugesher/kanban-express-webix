@@ -1,0 +1,6 @@
+entity: Task
+items:
+  task{1..100}:
+    text: '{{lorem.sentence}}'
+    author: '@user*'
+    assignedEmployee: '@user*'

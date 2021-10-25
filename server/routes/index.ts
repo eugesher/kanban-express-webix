@@ -2,7 +2,7 @@ import { Request, Response, Router } from 'express';
 import AppController from '../controllers/app.controller';
 import passport from '../middlewares/passport.middleware';
 import ISession from '../interfaces/session.interface';
-import tasks from './tasks.route';
+import tasksRoute from './tasks.route';
 import User from '../entities/user.entity';
 
 const api = Router();
@@ -38,6 +38,6 @@ api.get('/data', (req: Request, res: Response) => {
   ]);
 });
 
-api.use('/tasks', tasks);
+api.use('/tasks', tasksRoute);
 
 export default api;
