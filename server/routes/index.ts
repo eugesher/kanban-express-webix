@@ -29,7 +29,7 @@ api.get('/data', (req, res) => {
   res.send([
     {
       id: 1,
-      title: 'The Shawshank Redemption',
+      name: 'The Shawshank Redemption',
       year: 1994,
       votes: 678790,
       rating: 9.2,
@@ -37,7 +37,7 @@ api.get('/data', (req, res) => {
     },
     {
       id: 2,
-      title: 'The Godfather',
+      name: 'The Godfather',
       year: 1972,
       votes: 511495,
       rating: 9.2,
@@ -45,7 +45,7 @@ api.get('/data', (req, res) => {
     },
     {
       id: 3,
-      title: 'The Godfather: Part II',
+      name: 'The Godfather: Part II',
       year: 1974,
       votes: 319352,
       rating: 9.0,
@@ -53,7 +53,7 @@ api.get('/data', (req, res) => {
     },
     {
       id: 4,
-      title: 'The Good, the Bad and the Ugly',
+      name: 'The Good, the Bad and the Ugly',
       year: 1966,
       votes: 213030,
       rating: 8.9,
@@ -61,7 +61,7 @@ api.get('/data', (req, res) => {
     },
     {
       id: 5,
-      title: 'My Fair Lady',
+      name: 'My Fair Lady',
       year: 1964,
       votes: 533848,
       rating: 8.9,
@@ -69,7 +69,7 @@ api.get('/data', (req, res) => {
     },
     {
       id: 6,
-      title: '12 Angry Men',
+      name: '12 Angry Men',
       year: 1957,
       votes: 164558,
       rating: 8.9,
