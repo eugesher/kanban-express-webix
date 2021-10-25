@@ -31,4 +31,16 @@ export default class UsersController {
       return next(e);
     }
   }
+
+  public static async findAll(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
+    try {
+      res.send(await getRepository(User).find());
+    } catch (e) {
+      return next(e);
+    }
+  }
 }

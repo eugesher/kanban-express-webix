@@ -8,7 +8,10 @@ const INVALID_CREDENTIALS_MESSAGE = 'invalid user credentials';
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
-    const user = await getRepository(User).findOne({ username });
+    const user = await getRepository(User).findOne(
+      { username },
+      { select: ['id', 'password'] },
+    );
 
     if (!user) {
       return done(null, false, { message: INVALID_CREDENTIALS_MESSAGE });
