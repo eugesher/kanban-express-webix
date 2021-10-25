@@ -3,8 +3,8 @@ import UsersController from '../controllers/users.controller';
 import passport from '../middlewares/passport.middleware';
 import ISession from '../types/interfaces/session.interface';
 import tasksRoute from './tasks.route';
-import User from '../entities/user.entity';
 import usersRoute from './users.route';
+import TasksController from '../controllers/tasks.controller';
 
 const api = Router();
 
@@ -28,16 +28,7 @@ api.post('/logout', (req: Request, res: Response) => {
   res.send({});
 });
 
-api.get('/data', (req: Request, res: Response) => {
-  const user = req.user as User;
-  res.send([
-    {
-      user: user.username,
-      session: req.sessionID,
-      TTL: req.session.cookie.maxAge,
-    },
-  ]);
-});
+api.get('/data', TasksController.findAll);
 
 api.use('/tasks', tasksRoute);
 api.use('/users', usersRoute);

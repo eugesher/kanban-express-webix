@@ -31,6 +31,6 @@ export default class Task {
     nullable: true,
     eager: true,
   })
-  @JoinColumn({ name: 'assigned_employee' })
+  @JoinColumn({ name: 'assigned_employee_id' })
   assignedEmployee: User;
 }

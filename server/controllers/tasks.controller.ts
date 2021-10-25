@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import ICreateTaskDto from '../types/dto/create-task.dto';
 import Task from '../entities/task.entity';
+import User from '../entities/user.entity';
 
 export default class TasksController {
   public static async create(
@@ -26,7 +27,13 @@ export default class TasksController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      res.send(await getRepository(Task).find());
+      const user = req.user as User;
+      const tasks = await getRepository(Task)
+        .createQueryBuilder('tasks')
+        .where('tasks.author_id = :id', { id: user.id })
+        .orWhere('tasks.assigned_employee_id = :id', { id: user.id })
+        .getMany();
+      res.send(tasks);
     } catch (e) {
       return next(e);
     }
