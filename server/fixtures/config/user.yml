@@ -1,0 +1,11 @@
+entity: User
+processor: ../processors/user.processor.ts
+items:
+  user{0}:
+    username: 'foo'
+    password: 'foo'
+    fullName: 'Foo Bar'
+  user{1..10}:
+    username: '{{internet.userName}}'
+    password: 'foo'
+    fullName: '{{name.findName}}'

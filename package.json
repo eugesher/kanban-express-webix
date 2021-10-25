@@ -15,7 +15,8 @@
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config=server/config/ormconfig.ts",
     "db:drop": "npm run typeorm schema:drop",
     "db:create": "npm run typeorm migration:generate -- -n",
-    "db:migrate": "npm run typeorm migration:run"
+    "db:migrate": "npm run typeorm migration:run",
+    "db:seed": "ts-node server/fixtures/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -64,6 +65,7 @@
     "nodemon": "^2.0.14",
     "prettier": "^2.4.1",
     "tsconfig-paths": "^3.10.1",
+    "typeorm-fixtures-cli": "^1.9.2",
     "typescript": "^4.4.4",
     "url-loader": "^0.5.9",
     "webpack": "^4.12.1",
