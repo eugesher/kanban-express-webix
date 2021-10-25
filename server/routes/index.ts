@@ -1,13 +1,14 @@
 import { Request, Response, Router } from 'express';
-import AppController from '../controllers/app.controller';
+import UsersController from '../controllers/users.controller';
 import passport from '../middlewares/passport.middleware';
 import ISession from '../types/interfaces/session.interface';
 import tasksRoute from './tasks.route';
 import User from '../entities/user.entity';
+import usersRoute from './users.route';
 
 const api = Router();
 
-api.post('/register', AppController.register);
+api.post('/register', UsersController.register);
 api.post(
   '/login',
   passport.authenticate('local', {
@@ -39,5 +40,6 @@ api.get('/data', (req: Request, res: Response) => {
 });
 
 api.use('/tasks', tasksRoute);
+api.use('/users', usersRoute);
 
 export default api;

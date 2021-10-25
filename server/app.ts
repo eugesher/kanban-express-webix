@@ -4,12 +4,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import { createConnection } from 'typeorm';
-import { ensureLoggedIn } from 'connect-ensure-login';
 import passport from './middlewares/passport.middleware';
 import ormconfig from './config/ormconfig';
 import sessionOptions from './config/session-options';
 import api from './routes';
-import AppController from './controllers/app.controller';
 import errorHandler from './exceptions';
 
 dotenv.config();
@@ -28,8 +26,6 @@ createConnection(ormconfig)
     app.use(passport.session());
 
     app.use('/api', api);
-
-    app.get('/dashboard', ensureLoggedIn(), AppController.getDashboardPage);
 
     app.use(errorHandler);
 

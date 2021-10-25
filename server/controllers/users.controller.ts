@@ -6,7 +6,7 @@ import UnprocessableEntityException from '../exceptions/unprocessable-entity.exc
 
 const EMAIL_TAKEN_MESSAGE = 'email is already taken';
 
-export default class AppController {
+export default class UsersController {
   public static async register(
     req: Request<any, any, IRegisterDto>,
     res: Response,
@@ -30,12 +30,5 @@ export default class AppController {
     } catch (e) {
       return next(e);
     }
-  }
-
-  public static getDashboardPage(req: Request, res: Response): void {
-    const user = req.user as User;
-    res.send(
-      `Hello ${user.username}. Your session ID is ${req.sessionID} and your session expires in ${req.session.cookie.maxAge} milliseconds.`,
-    );
   }
 }
