@@ -33,7 +33,18 @@ export default class TasksController {
         .where('tasks.author_id = :id', { id: user.id })
         .orWhere('tasks.assigned_employee_id = :id', { id: user.id })
         .getMany();
-      res.send(tasks);
+
+      const result = tasks.map((task) => {
+        return {
+          id: task.id,
+          text: task.text,
+          status: 'new',
+          comments: [2],
+          user_id: 1,
+          tags: [1, 2],
+        };
+      });
+      res.send(result);
     } catch (e) {
       return next(e);
     }
