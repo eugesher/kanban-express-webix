@@ -4,7 +4,7 @@ import { getRepository } from 'typeorm';
 import User from '../entities/user.entity';
 
 export default class TasksService {
-  private static async move(task, dto) {
+  private static async move(task: Task, dto: IUpdateTaskDto): Promise<Task[]> {
     const moveIndex = parseInt(dto.webix_move_index);
     const moveParent = dto.webix_move_parent;
     const tasksByStatus = await getRepository(Task)
