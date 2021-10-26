@@ -30,18 +30,19 @@ export default class TasksController {
       const user = req.user as User;
       const tasks = await getRepository(Task)
         .createQueryBuilder('tasks')
+        .leftJoinAndSelect('tasks.assignedEmployee', 'users')
         .where('tasks.author_id = :id', { id: user.id })
         .orWhere('tasks.assigned_employee_id = :id', { id: user.id })
         .getMany();
+
+      console.log(tasks[0]);
 
       const result = tasks.map((task) => {
         return {
           id: task.id,
           text: task.text,
           status: task.status,
-          comments: [2],
-          user_id: 1,
-          tags: [1, 2],
+          user_id: task.assignedEmployee.id,
         };
       });
       res.send(result);
