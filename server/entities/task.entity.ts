@@ -20,6 +20,9 @@ export default class Task {
   @Column({ type: 'enum', enum: TaskStatus, default: TaskStatus.new })
   status: string;
 
+  @Column({ type: 'smallint', unsigned: true })
+  order: number;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

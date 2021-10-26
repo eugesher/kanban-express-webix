@@ -1,6 +1,22 @@
 entity: Task
-processor: ../processors/task.processor.ts
 items:
-  task{1..25}:
+  task{0..4}:
     text: '{{lorem.sentence}}'
+    status: 'new'
     assignedEmployee: '@user*'
+    order: '($current)'
+  task{5..9}:
+    text: '{{lorem.sentence}}'
+    status: 'work'
+    assignedEmployee: '@user*'
+    order: '($current-5)'
+  task{10..14}:
+    text: '{{lorem.sentence}}'
+    status: 'test'
+    assignedEmployee: '@user*'
+    order: '($current-10)'
+  task{15..19}:
+    text: '{{lorem.sentence}}'
+    status: 'done'
+    assignedEmployee: '@user*'
+    order: '($current-15)'

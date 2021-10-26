@@ -1,7 +1,12 @@
 entity: User
 processor: ../processors/user.processor.ts
 items:
-  user{1..5}:
+  user{0}:
+    username: 'foo'
+    password: 'foo'
+    fullName: 'Foo Bar'
+    avatar: '{{image.avatar}}'
+  user{1..4}:
     username: '{{internet.userName}}'
     password: 'foo'
     fullName: '{{name.findName}}'
