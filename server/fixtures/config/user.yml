@@ -5,3 +5,4 @@ items:
     username: '{{internet.userName}}'
     password: 'foo'
     fullName: '{{name.findName}}'
+    avatar: '{{image.avatar}}'

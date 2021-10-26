@@ -43,6 +43,7 @@ export default class UsersController {
         return {
           id: user.id,
           value: user.fullName,
+          image: user.avatar,
         };
       });
 

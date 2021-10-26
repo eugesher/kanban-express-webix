@@ -22,6 +22,9 @@ export default class User {
   @Column({ name: 'full_name' })
   fullName: string;
 
+  @Column()
+  avatar: string;
+
   @OneToMany(() => Task, (task) => task.author)
   tasks: Task[];
 
