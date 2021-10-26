@@ -38,7 +38,7 @@ export default class TasksController {
         return {
           id: task.id,
           text: task.text,
-          status: 'new',
+          status: task.status,
           comments: [2],
           user_id: 1,
           tags: [1, 2],

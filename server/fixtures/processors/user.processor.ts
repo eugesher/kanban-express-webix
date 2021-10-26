@@ -13,7 +13,7 @@ export default class UserProcessor implements IProcessor<User> {
       .replace(this._underscore, this._emptyString);
   }
 
-  preProcess(name: string, object: any): any {
+  public preProcess(name: string, object: any): any {
     const username = this.normalizeUsername(object.username);
     return { ...object, username };
   }
