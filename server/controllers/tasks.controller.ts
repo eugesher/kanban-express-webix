@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { getRepository } from 'typeorm';
 import ICreateTaskDto from '../types/dto/create-task.dto';
-import Task from '../entities/task.entity';
-import User from '../entities/user.entity';
+import TasksService from '../services/tasks.service';
 
 export default class TasksController {
   public static async create(
@@ -11,11 +9,7 @@ export default class TasksController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      let task = new Task();
-      Object.assign(task, { ...req.body, ...req.user });
-
-      task = await getRepository(Task).save(task);
-      res.send(task);
+      res.send(await TasksService.create(req));
     } catch (e) {
       return next(e);
     }
@@ -27,14 +21,7 @@ export default class TasksController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      const user = req.user as User;
-      const tasks = await getRepository(Task)
-        .createQueryBuilder('tasks')
-        .leftJoinAndSelect('tasks.assignedEmployee', 'users')
-        .where('tasks.author_id = :id', { id: user.id })
-        .orWhere('tasks.assigned_employee_id = :id', { id: user.id })
-        .getMany();
-
+      const tasks = await TasksService.findAll(req);
       const result = tasks.map((task) => {
         return {
           id: task.id,
