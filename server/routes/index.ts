@@ -13,7 +13,7 @@ api.post(
   '/login',
   passport.authenticate('local', {
     failureRedirect: '/',
-    successRedirect: '/api/data',
+    successRedirect: '/api/tasks',
   }),
 );
 
