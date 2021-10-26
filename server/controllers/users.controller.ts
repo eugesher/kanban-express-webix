@@ -38,7 +38,16 @@ export default class UsersController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      res.send(await getRepository(User).find());
+      const users = await getRepository(User).find();
+      const result = users.map((user) => {
+        return {
+          id: user.id,
+          value: user.fullName,
+        };
+      });
+
+      console.log(result);
+      res.send(result);
     } catch (e) {
       return next(e);
     }

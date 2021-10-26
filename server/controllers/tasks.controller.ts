@@ -35,8 +35,6 @@ export default class TasksController {
         .orWhere('tasks.assigned_employee_id = :id', { id: user.id })
         .getMany();
 
-      console.log(tasks[0]);
-
       const result = tasks.map((task) => {
         return {
           id: task.id,
