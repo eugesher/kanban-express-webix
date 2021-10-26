@@ -3,7 +3,7 @@ import TasksController from '../controllers/tasks.controller';
 
 const tasksRoute = Router();
 
-tasksRoute.post('/', TasksController.create);
 tasksRoute.get('/', TasksController.findAll);
+tasksRoute.post('/update', TasksController.update);
 
 export default tasksRoute;

@@ -3,5 +3,4 @@ processor: ../processors/task.processor.ts
 items:
   task{1..25}:
     text: '{{lorem.sentence}}'
-    author: '@user*'
     assignedEmployee: '@user*'

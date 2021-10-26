@@ -9,6 +9,7 @@ import ormconfig from './config/ormconfig';
 import sessionOptions from './config/session-options';
 import api from './routes';
 import errorHandler from './exceptions';
+import nocache from 'nocache';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ createConnection(ormconfig)
     app.use(session(sessionOptions));
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(nocache());
 
     app.use('/api', api);
 

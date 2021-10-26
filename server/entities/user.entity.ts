@@ -25,9 +25,6 @@ export default class User {
   @Column()
   avatar: string;
 
-  @OneToMany(() => Task, (task) => task.author)
-  tasks: Task[];
-
   @OneToMany(() => Task, (task) => task.assignedEmployee)
   assignedTasks: Task[];
 

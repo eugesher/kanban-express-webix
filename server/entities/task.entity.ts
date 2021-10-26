@@ -23,10 +23,6 @@ export default class Task {
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @ManyToOne(() => User, (user) => user.tasks, { eager: true })
-  @JoinColumn({ name: 'author_id' })
-  author: User;
-
   @ManyToOne(() => User, (user) => user.assignedTasks, {
     nullable: true,
     eager: true,

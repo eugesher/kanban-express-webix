@@ -1,15 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
-import ICreateTaskDto from '../types/dto/create-task.dto';
+import IUpdateTaskDto from '../types/dto/update-task.dto';
 import TasksService from '../services/tasks.service';
 
 export default class TasksController {
-  public static async create(
-    req: Request<any, any, ICreateTaskDto>,
+  public static async update(
+    req: Request<any, any, IUpdateTaskDto>,
     res: Response,
     next: NextFunction,
   ): Promise<void> {
     try {
-      res.send(await TasksService.create(req));
+      const dto = req.body;
+      res.send(await TasksService.update(dto));
     } catch (e) {
       return next(e);
     }
@@ -21,7 +22,7 @@ export default class TasksController {
     next: NextFunction,
   ): Promise<void> {
     try {
-      const tasks = await TasksService.findAll(req);
+      const tasks = await TasksService.findAll();
       const result = tasks.map((task) => {
         return {
           id: task.id,
