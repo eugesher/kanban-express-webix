@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import ISaveTaskDto from '../types/dto/save-task.dto';
 import TasksService from '../services/tasks.service';
+import User from '../entities/user.entity';
 
 export default class TasksController {
   public static async save(
@@ -10,7 +11,8 @@ export default class TasksController {
   ): Promise<void> {
     try {
       const dto = req.body;
-      res.send(await TasksService.save(dto));
+      const currentUserId = (req.user as User).id;
+      res.send(await TasksService.save(dto, currentUserId));
     } catch (e) {
       return next(e);
     }

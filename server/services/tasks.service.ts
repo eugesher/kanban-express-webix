@@ -30,11 +30,44 @@ export default class TasksService {
     return await getRepository(Task).save(result);
   }
 
-  public static async save(dto: ISaveTaskDto): Promise<Task> {
+  public static async insert(
+    dto: ISaveTaskDto,
+    currentUserId: string,
+  ): Promise<Task[]> {
+    const tasksByStatus = await getRepository(Task)
+      .createQueryBuilder('tasks')
+      .where('tasks.status = :status', { status: dto.status })
+      .orderBy('tasks.order', 'ASC')
+      .getMany();
+    console.log(dto);
+    const task = new Task();
+    task.text = dto.text;
+    task.status = dto.status;
+    task.assignedEmployee = dto.user_id
+      ? await getRepository(User).findOne(dto.user_id)
+      : await getRepository(User).findOne(currentUserId);
+
+    tasksByStatus.push(task);
+
+    const result = tasksByStatus.map((task, index) => {
+      return { ...task, order: index };
+    });
+
+    return await getRepository(Task).save(result);
+  }
+
+  public static async save(
+    dto: ISaveTaskDto,
+    currentUserId: string,
+  ): Promise<Task> {
     const task = await getRepository(Task).findOne(dto.id);
 
     if (dto.webix_move_parent) {
       await TasksService.move(task, dto);
+    }
+
+    if (dto.webix_operation === 'insert') {
+      await TasksService.insert(dto, currentUserId);
     }
 
     task.text = dto.text;
