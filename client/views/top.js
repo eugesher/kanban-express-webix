@@ -18,12 +18,37 @@ export default class TopView extends JetView {
       click: () => this.show('/logout'),
     };
 
+    const addCard = {
+      view: 'button',
+      type: 'form',
+      label: 'Add new card',
+      click: () => {
+        $$('board').showEditor();
+      },
+    };
+
+    const removeCard = {
+      view: 'button',
+      type: 'danger',
+      label: 'Remove selected',
+      click: () => {
+        const id = $$('board').getSelectedId();
+        if (!id) {
+          return webix.alert('Please selected a card that you want to remove!');
+        }
+        $$('board').remove(id);
+      },
+    };
+
     return {
       rows: [
         {
           type: 'wide',
           padding: { top: 4 },
-          cols: [{ rows: [menu, logout] }, { $subview: true }],
+          cols: [
+            { rows: [addCard, removeCard, menu, logout] },
+            { $subview: true },
+          ],
         },
       ],
     };

@@ -3,6 +3,7 @@ import { JetView } from 'webix-jet';
 export default class KanbanView extends JetView {
   config() {
     return {
+      id: 'board',
       view: 'kanban',
       editor: true,
       type: 'space',
