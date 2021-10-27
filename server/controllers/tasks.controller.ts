@@ -30,6 +30,7 @@ export class TasksController {
           id: task.id,
           text: task.text,
           status: task.status,
+          color: task.color,
           user_id: task.assignedEmployee.id,
         };
       });

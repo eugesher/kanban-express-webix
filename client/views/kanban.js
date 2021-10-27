@@ -14,6 +14,11 @@ export default class KanbanView extends JetView {
         { header: 'Testing', body: { view: 'kanbanlist', status: 'test' } },
         { header: 'Done', body: { view: 'kanbanlist', status: 'done' } },
       ],
+      colors: [
+        { id: 'normal', value: 'Normal', color: 'green' },
+        { id: 'low', value: 'Low', color: 'orange' },
+        { id: 'urgent', value: 'Urgent', color: 'red' },
+      ],
       users: '/api/users',
       url: '/api/tasks',
       save: '/api/tasks/save',

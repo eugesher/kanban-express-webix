@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 import { Task } from '../entities/task.entity';
 import { User } from '../entities/user.entity';
 import { ISaveTaskDto } from '../types/dto/save-task.dto';
+import { TaskColor } from '../types/enums/task-color.enum';
 
 export class TasksService {
   private static setOrder(tasks: Task[]): Task[] {
@@ -27,6 +28,7 @@ export class TasksService {
     const task = new Task();
     task.text = dto.text;
     task.status = dto.status;
+    task.color = dto.color ? TaskColor[dto.color] : TaskColor.normal;
     task.assignedEmployee = dto.user_id
       ? await getRepository(User).findOne(dto.user_id)
       : await getRepository(User).findOne(currentUserId);
@@ -84,6 +86,7 @@ export class TasksService {
     }
 
     task.text = dto.text;
+    task.color = dto.color;
     task.assignedEmployee = await getRepository(User).findOne(dto.user_id);
     return await getRepository(Task).save(task);
   }

@@ -4,6 +4,7 @@ export interface ISaveTaskDto {
   id: string;
   text: string;
   status: string;
+  color: string;
   user_id: string;
   webix_operation: 'insert' | 'update' | 'delete';
   webix_move_index?: string;
