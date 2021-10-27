@@ -4,12 +4,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import { createConnection } from 'typeorm';
-import passport from './middlewares/passport.middleware';
-import ormconfig from './config/ormconfig';
-import sessionOptions from './config/session-options';
-import api from './routes';
-import errorHandler from './exceptions';
 import nocache from 'nocache';
+import api from './routes';
+import passport from './middlewares/passport.middleware';
+import { ormconfig } from './config/ormconfig';
+import { sessionOptions } from './config/session-options';
+import { errorHandler } from './exceptions';
 
 dotenv.config();
 

@@ -6,11 +6,11 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import User from './user.entity';
-import TaskStatus from '../types/enums/task-status.enum';
+import { User } from './user.entity';
+import { TaskStatus } from '../types/enums/task-status.enum';
 
 @Entity('tasks')
-export default class Task {
+export class Task {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

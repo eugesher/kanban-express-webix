@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import UsersService from '../services/users.service';
+import { UsersService } from '../services/users.service';
 
-export default class UsersController {
+export class UsersController {
   public static async findAll(
     req: Request,
     res: Response,

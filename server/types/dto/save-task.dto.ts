@@ -1,6 +1,6 @@
-import TaskStatus from '../enums/task-status.enum';
+import { TaskStatus } from '../enums/task-status.enum';
 
-export default interface ISaveTaskDto {
+export interface ISaveTaskDto {
   id: string;
   text: string;
   status: string;

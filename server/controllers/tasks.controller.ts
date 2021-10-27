@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import ISaveTaskDto from '../types/dto/save-task.dto';
-import TasksService from '../services/tasks.service';
-import User from '../entities/user.entity';
+import { TasksService } from '../services/tasks.service';
+import { User } from '../entities/user.entity';
+import { ISaveTaskDto } from '../types/dto/save-task.dto';
 
-export default class TasksController {
+export class TasksController {
   public static async save(
     req: Request<any, any, ISaveTaskDto>,
     res: Response,

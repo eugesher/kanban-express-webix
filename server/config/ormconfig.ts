@@ -4,7 +4,7 @@ import { join } from 'path';
 
 dotenv.config();
 
-const ormconfig: ConnectionOptions = {
+export const ormconfig: ConnectionOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT),
@@ -17,5 +17,3 @@ const ormconfig: ConnectionOptions = {
     migrationsDir: 'server/migrations',
   },
 };
-
-export default ormconfig;

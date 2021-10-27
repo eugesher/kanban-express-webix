@@ -1,4 +1,4 @@
-export default interface IError {
+export interface IError {
   statusCode: number;
   message: string;
 }

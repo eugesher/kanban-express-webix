@@ -6,10 +6,10 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { hash } from 'bcrypt';
-import Task from './task.entity';
+import { Task } from './task.entity';
 
 @Entity()
-export default class User {
+export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

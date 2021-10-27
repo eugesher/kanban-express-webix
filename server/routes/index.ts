@@ -1,8 +1,8 @@
 import { Router } from 'express';
+import { AppController } from '../controllers/app.controller';
 import passport from '../middlewares/passport.middleware';
 import tasksRoute from './tasks.route';
 import usersRoute from './users.route';
-import AppController from '../controllers/app.controller';
 
 const api = Router();
 

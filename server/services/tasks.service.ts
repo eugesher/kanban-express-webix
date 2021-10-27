@@ -1,9 +1,9 @@
-import ISaveTaskDto from '../types/dto/save-task.dto';
-import Task from '../entities/task.entity';
 import { getRepository } from 'typeorm';
-import User from '../entities/user.entity';
+import { Task } from '../entities/task.entity';
+import { User } from '../entities/user.entity';
+import { ISaveTaskDto } from '../types/dto/save-task.dto';
 
-export default class TasksService {
+export class TasksService {
   private static async insert(
     dto: ISaveTaskDto,
     currentUserId: string,

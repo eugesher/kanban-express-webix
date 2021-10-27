@@ -2,8 +2,8 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { getRepository } from 'typeorm';
 import { compare } from 'bcrypt';
-import User from '../entities/user.entity';
-import ISession from '../types/interfaces/session.interface';
+import { User } from '../entities/user.entity';
+import { ISession } from '../types/interfaces/session.interface';
 
 const INVALID_CREDENTIALS_MESSAGE = 'invalid user credentials';
 
