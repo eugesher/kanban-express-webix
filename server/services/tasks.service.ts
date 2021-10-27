@@ -4,39 +4,42 @@ import { User } from '../entities/user.entity';
 import { ISaveTaskDto } from '../types/dto/save-task.dto';
 
 export class TasksService {
+  private static setOrder(tasks: Task[]): Task[] {
+    return tasks.map((task, index) => {
+      return { ...task, order: index };
+    });
+  }
+
+  private static async getTasksByStatus(status) {
+    return getRepository(Task)
+      .createQueryBuilder('tasks')
+      .where('tasks.status = :status', { status })
+      .orderBy('tasks.order', 'ASC')
+      .getMany();
+  }
+
   private static async insert(
     dto: ISaveTaskDto,
     currentUserId: string,
   ): Promise<Task[]> {
-    const tasksByStatus = await getRepository(Task)
-      .createQueryBuilder('tasks')
-      .where('tasks.status = :status', { status: dto.status })
-      .orderBy('tasks.order', 'ASC')
-      .getMany();
+    const tasksByStatus = await TasksService.getTasksByStatus(dto.status);
+
     const task = new Task();
     task.text = dto.text;
     task.status = dto.status;
     task.assignedEmployee = dto.user_id
       ? await getRepository(User).findOne(dto.user_id)
       : await getRepository(User).findOne(currentUserId);
-
     tasksByStatus.push(task);
 
-    const result = tasksByStatus.map((task, index) => {
-      return { ...task, order: index };
-    });
-
+    const result = TasksService.setOrder(tasksByStatus);
     return await getRepository(Task).save(result);
   }
 
   private static async move(task: Task, dto: ISaveTaskDto): Promise<Task[]> {
     const moveIndex = parseInt(dto.webix_move_index);
     const moveParent = dto.webix_move_parent;
-    const tasksByStatus = await getRepository(Task)
-      .createQueryBuilder('tasks')
-      .where('tasks.status = :status', { status: moveParent })
-      .orderBy('tasks.order', 'ASC')
-      .getMany();
+    const tasksByStatus = await TasksService.getTasksByStatus(moveParent);
     const isInternalMove = tasksByStatus.some((task) => task.id === dto.id);
 
     if (isInternalMove) {
@@ -48,29 +51,17 @@ export class TasksService {
       tasksByStatus.splice(moveIndex, 0, task);
     }
 
-    const result = tasksByStatus.map((task, index) => {
-      return { ...task, order: index };
-    });
-
+    const result = TasksService.setOrder(tasksByStatus);
     return await getRepository(Task).save(result);
   }
 
   private static async delete(dto: ISaveTaskDto): Promise<Task[]> {
-    const tasksByStatus = await getRepository(Task)
-      .createQueryBuilder('tasks')
-      .where('tasks.status = :status', { status: dto.status })
-      .orderBy('tasks.order', 'ASC')
-      .getMany();
-
+    const tasksByStatus = await TasksService.getTasksByStatus(dto.status);
     const index = tasksByStatus.findIndex((task) => task.id === dto.id);
     tasksByStatus.splice(index, 1);
-
     await getRepository(Task).delete(dto.id);
 
-    const result = tasksByStatus.map((task, index) => {
-      return { ...task, order: index };
-    });
-
+    const result = TasksService.setOrder(tasksByStatus);
     return await getRepository(Task).save(result);
   }
 
@@ -93,7 +84,6 @@ export class TasksService {
     }
 
     task.text = dto.text;
-    task.order = parseInt(dto.webix_move_index);
     task.assignedEmployee = await getRepository(User).findOne(dto.user_id);
     return await getRepository(Task).save(task);
   }
