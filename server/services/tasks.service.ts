@@ -77,19 +77,19 @@ export default class TasksService {
   public static async save(
     dto: ISaveTaskDto,
     currentUserId: string,
-  ): Promise<Task> {
+  ): Promise<Task | Task[]> {
     const task = await getRepository(Task).findOne(dto.id);
 
     if (dto.webix_move_parent) {
-      await TasksService.move(task, dto);
+      return await TasksService.move(task, dto);
     }
 
     if (dto.webix_operation === 'insert') {
-      await TasksService.insert(dto, currentUserId);
+      return await TasksService.insert(dto, currentUserId);
     }
 
     if (dto.webix_operation === 'delete') {
-      await TasksService.delete(dto);
+      return await TasksService.delete(dto);
     }
 
     task.text = dto.text;
