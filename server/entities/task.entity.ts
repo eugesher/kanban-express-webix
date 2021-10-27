@@ -23,6 +23,9 @@ export class Task {
   @Column({ type: 'smallint', unsigned: true })
   order: number;
 
+  @Column()
+  color: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

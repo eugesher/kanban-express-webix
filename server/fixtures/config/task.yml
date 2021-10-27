@@ -1,4 +1,5 @@
 entity: Task
+processor: ../processors/task.processor.ts
 items:
   task{0..4}:
     text: '{{lorem.sentence}}'
