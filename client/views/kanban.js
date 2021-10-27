@@ -16,7 +16,7 @@ export default class KanbanView extends JetView {
       ],
       users: '/api/users',
       url: '/api/tasks',
-      save: '/api/tasks/update',
+      save: '/api/tasks/save',
     };
   }
 }

@@ -1,10 +1,10 @@
-import IUpdateTaskDto from '../types/dto/update-task.dto';
+import ISaveTaskDto from '../types/dto/save-task.dto';
 import Task from '../entities/task.entity';
 import { getRepository } from 'typeorm';
 import User from '../entities/user.entity';
 
 export default class TasksService {
-  private static async move(task: Task, dto: IUpdateTaskDto): Promise<Task[]> {
+  private static async move(task: Task, dto: ISaveTaskDto): Promise<Task[]> {
     const moveIndex = parseInt(dto.webix_move_index);
     const moveParent = dto.webix_move_parent;
     const tasksByStatus = await getRepository(Task)
@@ -30,7 +30,7 @@ export default class TasksService {
     return await getRepository(Task).save(result);
   }
 
-  public static async update(dto: IUpdateTaskDto): Promise<Task> {
+  public static async save(dto: ISaveTaskDto): Promise<Task> {
     const task = await getRepository(Task).findOne(dto.id);
 
     if (dto.webix_move_parent) {

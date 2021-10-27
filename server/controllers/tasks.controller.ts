@@ -1,16 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
-import IUpdateTaskDto from '../types/dto/update-task.dto';
+import ISaveTaskDto from '../types/dto/save-task.dto';
 import TasksService from '../services/tasks.service';
 
 export default class TasksController {
-  public static async update(
-    req: Request<any, any, IUpdateTaskDto>,
+  public static async save(
+    req: Request<any, any, ISaveTaskDto>,
     res: Response,
     next: NextFunction,
   ): Promise<void> {
     try {
       const dto = req.body;
-      res.send(await TasksService.update(dto));
+      res.send(await TasksService.save(dto));
     } catch (e) {
       return next(e);
     }
