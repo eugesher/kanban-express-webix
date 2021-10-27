@@ -20,7 +20,7 @@ export default class TopView extends JetView {
 
     const addCard = {
       view: 'button',
-      type: 'form',
+      css: 'webix_primary',
       label: 'Add new card',
       click: () => {
         $$('board').showEditor();
@@ -29,7 +29,7 @@ export default class TopView extends JetView {
 
     const removeCard = {
       view: 'button',
-      type: 'danger',
+      css: 'webix_danger',
       label: 'Remove selected',
       click: () => {
         const id = $$('board').getSelectedId();
