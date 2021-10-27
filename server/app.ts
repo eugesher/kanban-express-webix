@@ -7,9 +7,9 @@ import { createConnection } from 'typeorm';
 import nocache from 'nocache';
 import api from './routes';
 import passport from './middlewares/passport.middleware';
-import { ormconfig } from './config/ormconfig';
 import { sessionOptions } from './config/session-options';
 import { errorHandler } from './exceptions';
+import ormconfig from './config/ormconfig';
 
 dotenv.config();
 

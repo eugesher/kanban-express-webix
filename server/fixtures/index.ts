@@ -7,8 +7,8 @@ import {
   Resolver,
 } from 'typeorm-fixtures-cli/dist';
 import { createConnection, getRepository } from 'typeorm';
-import { ormconfig } from '../config/ormconfig';
 import { User } from '../entities/user.entity';
+import ormconfig from '../config/ormconfig';
 
 const users: Pick<User, 'username' | 'password'>[] = [];
 
